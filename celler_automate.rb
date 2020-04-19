@@ -2,7 +2,12 @@
 
 require 'active_support/core_ext/array/access'
 
+# Implementation of a cellar automate
 class CellarAutomate
+
+  # @param [Symbol] start
+  # @param [Symbol] accepting
+  # @param [Hash] configuration
   def initialize(start:, accepting:, configuration:)
     @configuration = configuration
     @current = start
@@ -10,11 +15,12 @@ class CellarAutomate
     @stack = ['$']
   end
 
+  # Runs the automate with the given input, returns boolean if automate
   def run(input)
     chunks = input.split ''
 
     while (current_transition = transition(chunks.shift))
-      apply_transition current_transition
+      apply_transition(current_transition)
     end
 
     @current == @accepting
