@@ -15,7 +15,10 @@ class CellarAutomate
     @stack = ['$']
   end
 
-  # Runs the automate with the given input, returns boolean if automate
+  # Runs the automate with the given input,
+  # returns boolean if automate ended in an accepting state
+  #
+  # @param [String] input
   def run(input)
     chunks = input.split ''
 
@@ -28,6 +31,7 @@ class CellarAutomate
 
   private
 
+  # @param [Array] transition
   def apply_transition(transition)
     puts "Transitioning to #{transition.first}"
 
@@ -35,6 +39,10 @@ class CellarAutomate
     @stack.push(*transition.second.reverse)
   end
 
+  # Evaluates the next transition,
+  # based on the read char input and current stack state
+  #
+  # @param [String] char_input
   def transition(char_input)
     stack_input = @stack.pop
 
