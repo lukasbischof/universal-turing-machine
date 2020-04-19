@@ -23,23 +23,26 @@ class Main
   }.freeze
 
   def run
-    puts 'Geben Sie ihre Wort ein: '
+    puts 'Geben Sie Ihr Wort ein: '
 
     word = gets.chomp.gsub(/\s/, '')
-    automate = CellarAutomate.new(
+
+    prepared_input = prepare_input(word)
+    valid = automate.run(prepared_input)
+
+    puts(valid ? '--> Bingo' : '--> Böp')
+    puts("Resultat: #{UPNCalculator.new(word).calculate}") if valid
+  end
+
+  private
+
+  def automate
+    @automate ||= CellarAutomate.new(
       start: :q0,
       accepting: :q3,
       configuration: CONFIGURATION
     )
-
-    prepared_input = prepare_input(word)
-    valid = automate.run(prepared_input)
-    puts(valid ? 'Bingo' : 'Böp')
-
-    puts(UPNCalculator.new(word).calculate) if valid
   end
-
-  private
 
   def prepare_input(input)
     input.gsub(/\d/, 'D').gsub(/[#{UPNCalculator::ALLOWED_OPERATIONS}]/, 'O')
