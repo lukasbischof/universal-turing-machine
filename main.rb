@@ -47,10 +47,6 @@ class Main
   def prepare_input(input)
     input.gsub(/\d/, 'D').gsub(/[#{UPNCalculator::ALLOWED_OPERATIONS}]/, 'O')
   end
-
-  def validate(_to_validate)
-    puts 'Not VALID!'
-  end
 end
 
 Main.new.run
