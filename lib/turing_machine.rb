@@ -1,43 +1,58 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/array/access'
+require_relative 'tape'
 
-# Implementation of a turing maching
+# Implementation of a turing machine
 class TuringMachine
-  def initialize(start:, accepting:, configuration:)
-    @configuration = configuration
-    @current = start
-    @accepting = accepting
-    @stack = ['$']
+  def self.transition(new_state, write_operation, movement_operation)
+    [new_state, write_operation, movement_operation]
   end
 
-  def run(input)
-    chunks = input.split ''
+  # @param [Symbol] start
+  # @param [Symbol] accepting
+  # @param [Hash] configuration
+  def initialize(start:, accepting:, configuration:)
+    @configuration = configuration
+    @current_state = start
+    @accepting = accepting
+  end
 
-    while (current_transition = transition(chunks.shift))
+  # @param [Tape] tape
+  def run(tape)
+    @tape = tape
+
+    while (current_transition = next_transition)
       apply_transition(current_transition)
     end
 
-    @current == @accepting
+    @current_state == @accepting
   end
 
   private
 
   def apply_transition(transition)
-    puts "Transitioning to #{transition.first}"
+    puts @tape
+    puts "Applying #{transition}"
+    # puts "Transitioning to #{transition.first}"
 
-    @current = transition.first
-    @stack.push(*transition.second.reverse)
+    new_state, write_operation, movement_operation = transition
+
+    @current_state = new_state
+    @tape.write write_operation
+    @tape.move movement_operation
   end
 
-  def transition(char_input)
-    stack_input = @stack.pop
-
-    current_config = @configuration[@current]
+  def next_transition
+    input_character = @tape.read
     step = current_config.select do |config, _transition|
-      config == [char_input, stack_input]
+      config == input_character
     end
 
     step&.values&.first
+  end
+
+  def current_config
+    @configuration[@current_state]
   end
 end
