@@ -1,5 +1,3 @@
-# excercise-5b
+# THIN Aufgabe 8
 
-Co-authored-by: 
-* Philipp TheFehr v/o Private
-* Philippe Schneider v/o Skipper
+Implementation einer universellen Turing Maschine
