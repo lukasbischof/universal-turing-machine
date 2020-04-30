@@ -32,9 +32,10 @@ class TuringMachine
   private
 
   def apply_transition(transition)
+    puts 'Current Tape: '
     puts @tape
-    puts "Applying #{transition}"
-    # puts "Transitioning to #{transition.first}"
+    puts "--> Applying transition #{transition}"
+    puts
 
     new_state, write_operation, movement_operation = transition
 

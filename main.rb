@@ -29,7 +29,7 @@ class Main
     tape = Tape.new(gets.chomp.gsub(/\s/, '').split(''))
     valid = machine.run(tape)
 
-    puts(valid ? '--> Bingo' : '--> Böp')
+    puts(valid ? '=> Bingo'.bold : '=> Böp')
   end
 
   private
