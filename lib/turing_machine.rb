@@ -55,7 +55,7 @@ class TuringMachine
   end
 
   def log_transition(transition)
-    Logger.default.verbose_log <<~LOG
+    Logger.instance.verbose_log <<~LOG
       Current Tape:
       #{@tape}
       --> Applying transition #{transition}

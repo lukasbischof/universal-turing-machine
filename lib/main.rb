@@ -23,7 +23,7 @@ class Main
     end
 
     def logger
-      Logger.default
+      Logger.instance
     end
   end
 
