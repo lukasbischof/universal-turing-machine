@@ -12,11 +12,12 @@ class Main
   class << self
     private
 
-    def machine
+    def machine(tape)
       TuringMachine.new(
         start: :q0,
         accepting: :q3,
-        configuration: CONFIGURATION
+        configuration: CONFIGURATION,
+        tape: tape
       )
     end
   end
@@ -26,7 +27,7 @@ class Main
 
     # tape = Tape.new(gets.chomp.gsub(/\s/, '').split(''))
     tape = Tape.new(%w[0 1 0 0 1 1])
-    valid = machine.run(tape)
+    valid = machine(tape).run
 
     puts(valid ? '=> Bingo'.bold : '=> Böp')
   end

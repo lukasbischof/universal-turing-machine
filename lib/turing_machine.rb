@@ -9,16 +9,15 @@ class TuringMachine
   # @param [Symbol] start
   # @param [Symbol] accepting
   # @param [Hash] configuration
-  def initialize(start:, accepting:, configuration:)
+  # @param [Tape] tape
+  def initialize(start:, accepting:, configuration:, tape:)
     @configuration = configuration
     @current_state = start
     @accepting = accepting
+    @tape = tape
   end
 
-  # @param [Tape] tape
-  def run(tape)
-    @tape = tape
-
+  def run
     while (current_transition = next_transition)
       apply_transition(current_transition)
     end

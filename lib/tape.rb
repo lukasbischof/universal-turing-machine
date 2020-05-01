@@ -6,7 +6,7 @@ require 'colorize'
 class Tape
   def initialize(content = [])
     @position = 0
-    @storage = (content.dup.reduce([]) { |a, b| a.push(b, nil) })[0..-2]
+    @storage = padded_content(content)[0..-2]
   end
 
   def move(direction)
@@ -39,6 +39,10 @@ class Tape
   end
 
   private
+
+  def padded_content(content)
+    (content.reduce([]) { |memo, character| memo.push(character, nil) })
+  end
 
   def replace_nil(array)
     array.map { |item| item || 'ε' }
