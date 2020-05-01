@@ -23,6 +23,7 @@ PLATFORMS
 DEPENDENCIES
   activesupport
   colorize
+  zeitwerk
 
 BUNDLED WITH
    2.0.2
