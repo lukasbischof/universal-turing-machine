@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'yaml'
+require 'colorize'
 
 # Main entry point of application
 class Main
