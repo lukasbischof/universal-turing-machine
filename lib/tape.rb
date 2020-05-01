@@ -50,7 +50,7 @@ class Tape
     middle = (length - 1) / 2
 
     @storage.map.with_index do |char, index|
-      translated[position_for_index(index) + middle] = char
+      translated[TapeProjection.position_for_index(index) + middle] = char
     end
 
     translated << nil
@@ -65,19 +65,6 @@ class Tape
   end
 
   def storage_index
-    index_for_position(@position)
-  end
-
-  def index_for_position(position)
-    # [0, -1, 1, -2, 2, ...]
-    return 2 * position.abs - 1 if position.negative?
-
-    2 * position
-  end
-
-  def position_for_index(index)
-    return -(index + 1) / 2 if index.odd?
-
-    index / 2
+    TapeProjection.index_for_position(@position)
   end
 end
