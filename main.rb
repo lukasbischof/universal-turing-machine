@@ -3,25 +3,14 @@
 
 require_relative 'lib/turing_machine'
 require_relative 'lib/tape'
+require 'yaml'
 
 # Main entry point of application
 class Main
-  CONFIGURATION = {
-    q0: {
-      '1' => TuringMachine.transition(:q0, '1', :right),
-      '0' => TuringMachine.transition(:q1, '0', :right)
-    },
-    q1: {
-      '1' => TuringMachine.transition(:q0, '1', :right),
-      '0' => TuringMachine.transition(:q2, '0', :right)
-    },
-    q2: {
-      '0' => TuringMachine.transition(:q2, '0', :right),
-      '1' => TuringMachine.transition(:q2, '1', :right),
-      nil => TuringMachine.transition(:q3, nil, :right)
-    },
-    q3: {}
-  }.freeze
+  CONFIGURATION = YAML.safe_load(
+    File.read('./configuration.yml'),
+    [Symbol]
+  )[:machine].freeze
 
   def run
     puts 'Geben Sie den Band-Inhalt ein: '
