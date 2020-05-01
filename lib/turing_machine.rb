@@ -29,10 +29,7 @@ class TuringMachine
 
   # @param [Hash] transition
   def apply_transition(transition)
-    puts 'Current Tape: '
-    puts @tape
-    puts "--> Applying transition #{transition}"
-    puts
+    log_transition(transition)
 
     new_state, write_operation, movement_operation = transition
 
@@ -55,5 +52,14 @@ class TuringMachine
 
   def current_config
     @configuration[@current_state]
+  end
+
+  def log_transition(transition)
+    Logger.default.verbose_log <<~LOG
+      Current Tape:
+      #{@tape}
+      --> Applying transition #{transition}
+
+    LOG
   end
 end

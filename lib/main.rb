@@ -21,15 +21,19 @@ class Main
         tape: tape
       )
     end
+
+    def logger
+      Logger.default
+    end
   end
 
   def self.run
-    puts 'Geben Sie den Band-Inhalt ein: '
+    logger.log 'Geben Sie den Band-Inhalt ein: '
 
     # tape = Tape.new(gets.chomp.gsub(/\s/, '').split(''))
     tape = Tape.new(%w[0 1 0 0 1 1])
     valid = machine(tape).run
 
-    puts(valid ? '=> Bingo'.bold : '=> Böp')
+    logger.log(valid ? '=> Bingo'.bold : '=> Böp')
   end
 end
