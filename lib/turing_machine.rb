@@ -31,6 +31,7 @@ class TuringMachine
 
   private
 
+  # @param [Hash] transition
   def apply_transition(transition)
     puts 'Current Tape: '
     puts @tape
@@ -46,11 +47,14 @@ class TuringMachine
 
   def next_transition
     input_character = @tape.read
-    step = current_config.select do |config, _transition|
+    find_next_step(input_character)&.values&.first
+  end
+
+  # @param [String] input_character
+  def find_next_step(input_character)
+    current_config.select do |config, _transition|
       config == input_character
     end
-
-    step&.values&.first
   end
 
   def current_config
