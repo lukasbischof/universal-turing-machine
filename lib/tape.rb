@@ -45,7 +45,7 @@ class Tape
   end
 
   def replace_nil(array)
-    array.map { |item| item || 'ε' }
+    array.map { |item| item || '⎵' }
   end
 
   def projected
