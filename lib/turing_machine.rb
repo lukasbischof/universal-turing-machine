@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'active_support/core_ext/array/access'
-require_relative 'tape'
-
 # Implementation of a turing machine
 class TuringMachine
   def self.transition(new_state, write_operation, movement_operation)

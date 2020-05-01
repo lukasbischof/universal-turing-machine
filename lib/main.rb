@@ -9,7 +9,19 @@ class Main
     [Symbol]
   )[:machine].freeze
 
-  def run
+  class << self
+    private
+
+    def machine
+      TuringMachine.new(
+        start: :q0,
+        accepting: :q3,
+        configuration: CONFIGURATION
+      )
+    end
+  end
+
+  def self.run
     puts 'Geben Sie den Band-Inhalt ein: '
 
     # tape = Tape.new(gets.chomp.gsub(/\s/, '').split(''))
@@ -17,15 +29,5 @@ class Main
     valid = machine.run(tape)
 
     puts(valid ? '=> Bingo'.bold : '=> Böp')
-  end
-
-  private
-
-  def machine
-    @machine ||= TuringMachine.new(
-      start: :q0,
-      accepting: :q3,
-      configuration: CONFIGURATION
-    )
   end
 end
