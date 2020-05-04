@@ -51,7 +51,7 @@ class TuringMachine
   end
 
   def current_config
-    @configuration[@current_state]
+    @configuration.config[@current_state]
   end
 
   def log_transition(transition)
