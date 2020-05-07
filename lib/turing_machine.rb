@@ -22,7 +22,7 @@ class TuringMachine
       apply_transition(current_transition)
     end
 
-    Logger.instance.verbose_log "Final tape: \n#{@tape}"
+    Logger.instance.log "Final tape: \n#{@tape}"
 
     @current_state == @accepting
   end
