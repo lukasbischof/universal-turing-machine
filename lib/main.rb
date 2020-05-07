@@ -28,8 +28,6 @@ class Main
     logger.verbose_log "Gelesene TM Konfiguration: #{CONFIGURATION.config}"
     logger.log 'Geben Sie den Band-Inhalt ein: '
 
-    CONFIGURATION.write('./configuration.tmc')
-
     # tape = Tape.new(%w[0 1 0 0 1 1])
     tape = Tape.new(read_tape_content)
     valid = machine(tape).run
