@@ -13,7 +13,7 @@ class Main
     def machine(tape)
       TuringMachine.new(
         start: :q0,
-        accepting: :q3,
+        accepting: :q1,
         configuration: CONFIGURATION,
         tape: tape
       )
@@ -27,6 +27,8 @@ class Main
   def self.run
     logger.verbose_log "Gelesene TM Konfiguration: #{CONFIGURATION.config}"
     logger.log 'Geben Sie den Band-Inhalt ein: '
+
+    CONFIGURATION.write('./configuration.tmc')
 
     # tape = Tape.new(%w[0 1 0 0 1 1])
     tape = Tape.new(read_tape_content)
