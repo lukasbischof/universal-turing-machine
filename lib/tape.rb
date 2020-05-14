@@ -41,7 +41,7 @@ class Tape
   private
 
   def padded_content(content)
-    (content.reduce([]) { |memo, character| memo.push(character, nil) })
+    content.reduce([]) { |memo, character| memo.push(character, nil) }
   end
 
   def replace_nil(array)

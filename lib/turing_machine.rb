@@ -18,7 +18,9 @@ class TuringMachine
   end
 
   def run
+    count = 0
     while (current_transition = next_transition)
+      Logger.instance.verbose_log "Applying #{count += 1}. transition:"
       apply_transition(current_transition)
     end
 
